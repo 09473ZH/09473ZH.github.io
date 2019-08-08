@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Deploying Your First Docker Container | 不言朝夕</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="感觉这个教程挺有意思的！搬到博客来方便看吧嘿嘿。 懒得翻译了。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Deploying Your First Docker Container">
+<meta property="og:url" content="https://byzx.ink/2019/05/20/Deploying Your First Docker Container/index.html">
+<meta property="og:site_name" content="不言朝夕">
+<meta property="og:description" content="感觉这个教程挺有意思的！搬到博客来方便看吧嘿嘿。 懒得翻译了。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-05-20T13:48:50.675Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Deploying Your First Docker Container">
+<meta name="twitter:description" content="感觉这个教程挺有意思的！搬到博客来方便看吧嘿嘿。 懒得翻译了。">
+  
+    <link rel="alternate" href="/atom.xml" title="不言朝夕" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">不言朝夕</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://byzx.ink"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="hello-Deploying Your First Docker Container" class="article article-type-hello" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/20/Deploying Your First Docker Container/" class="article-date">
+  <time datetime="2019-05-20T07:00:00.000Z" itemprop="datePublished">2019-05-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Study-notes/">Study notes</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Deploying Your First Docker Container
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>感觉这个教程挺有意思的！搬到博客来方便看吧嘿嘿。</p>
+<p>懒得翻译了。</p>
+</blockquote>
+<a id="more"></a>
+
+
+
+
+
+
+
+<h1 id="Deploying-Your-First-Docker-Container"><a href="#Deploying-Your-First-Docker-Container" class="headerlink" title="Deploying Your First Docker Container"></a>Deploying Your First Docker Container</h1><p><a href="https://www.katacoda.com/courses/docker" target="_blank" rel="noopener">From katacoda  Learn Docker</a>    </p>
+<h2 id="Step-1-Running-A-Container"><a href="#Step-1-Running-A-Container" class="headerlink" title="Step 1 - Running A Container"></a>Step 1 - Running A Container</h2><p>The first task is to identify the name of the Docker Image which is configured to run <em>Redis</em>. With Docker, all containers are started based on a Docker Image. These images contain everything required to launch the process; the host doesn’t require any configuration or dependencies.</p>
+<p>Jane can find existing images at <a href="https://registry.hub.docker.com/" target="_blank" rel="noopener">registry.hub.docker.com/</a> or by using the command <code>docker search &lt;name&gt;</code>. For example, to find an image for <em>Redis</em>, you would use <code>docker search redis</code>.</p>
+<h4 id="Task"><a href="#Task" class="headerlink" title="Task"></a>Task</h4><p>Using the search command, Jane has identified that the <em>Redis</em> Docker Image is called <em>redis</em> and wants to run the <em>latest</em> release. Because <em>Redis</em> is a database, Jane wants to run it as a background service while she continues to work.</p>
+<p>To complete this step, launch a container in the background running an instance of Redis based on the official image.</p>
+<p>The Docker CLI has a command called <em>run</em> which will start a container based on a Docker Image. The structure is <em>docker run <options> <image-name></image-name></options></em>.</p>
+<p>By default, Docker will run a command in the foreground. To run in the background, the option <em>-d</em>needs to be specified.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d redis</span><br></pre></td></tr></table></figure>
+
+<p>By default, Docker will run the <em>latest</em> version available. If a particular version was required, it could be specified as a tag, for example, version 3.2 would be <em>docker run -d redis:3.2</em>.</p>
+<p>As this is the first time Jane is using the <em>Redis</em> image, it will be downloaded onto the Docker Host machine.</p>
+<h2 id="Step-2-Finding-Running-Containers"><a href="#Step-2-Finding-Running-Containers" class="headerlink" title="Step 2 - Finding Running Containers"></a>Step 2 - Finding Running Containers</h2><p>The launched container is running in the background, the <code>docker ps</code> command lists all running containers, the image used to start the container and uptime.</p>
+<p>This command also displays the friendly name and ID that can be used to find out information about individual containers.</p>
+<p>The command <code>docker inspect &lt;friendly-name|container-id&gt;</code>provides more details about a running container, such as IP address.</p>
+<p>The command <code>docker logs &lt;friendly-name|container-id&gt;</code> will display messages the container has written to standard error or standard out.</p>
+<h2 id="Step-3-Accessing-Redis"><a href="#Step-3-Accessing-Redis" class="headerlink" title="Step 3 - Accessing Redis"></a>Step 3 - Accessing Redis</h2><p>Jane is happy that <em>Redis</em> is running, but is surprised that she cannot access it. The reason is that each container is sandboxed. If a service needs to be accessible by a process not running in a container, then the port needs to be exposed via the Host.</p>
+<p>Once exposed, it is possible to access the process as if it were running on the host OS itself.</p>
+<p>Jane knows that by default, <em>Redis</em> runs on port <em>6379</em>. She has learned that by default other applications and library expect a <em>Redis</em> instance to be listening on the port.</p>
+<h4 id="Task-1"><a href="#Task-1" class="headerlink" title="Task"></a>Task</h4><p>After reading the documentation, Jane discovers that ports are bound when containers are started using <em>-p <host-port>:<container-port></container-port></host-port></em> option. Jane also discovers that it’s useful to define a name when starting the container, this means she doesn’t have to use Bash piping or keep looking up the name when trying to access the logs.</p>
+<p>Jane finds the best way to solve her problem of running <em>Redis</em> in the background, with a name of <em>redisHostPort</em> on port <em>6379</em> is using the following command <code>docker run -d --name redisHostPort -p 6379:6379 redis:latest</code></p>
+<h4 id="Protip"><a href="#Protip" class="headerlink" title="Protip"></a>Protip</h4><p>By default, the port on the host is mapped to 0.0.0.0, which means all IP addresses. You can specify a particular IP address when you define the port mapping, for example, <em>-p 127.0.0.1:6379:6379</em></p>
+<h2 id="Step-5-Persisting-Data"><a href="#Step-5-Persisting-Data" class="headerlink" title="Step 5 - Persisting Data"></a>Step 5 - Persisting Data</h2><p>After working with containers for a few days, Jane realises that the data stored keeps being removed when she deletes and re-creates a container. Jane needs the data to be persisted and reused when she recreates a container.</p>
+<p>Containers are designed to be stateless. Binding directories (also known as volumes) is done using the option <em>-v <host-dir>:<container-dir></container-dir></host-dir></em>. When a directory is mounted, the files which exist in that directory on the host can be accessed by the container and any data changed/written to the directory inside the container will be stored on the host. This allows you to upgrade or change containers without losing your data.</p>
+<h4 id="Task-2"><a href="#Task-2" class="headerlink" title="Task"></a>Task</h4><p>Using the Docker Hub documentation for <a href="https://hub.docker.com/_/redis/" target="_blank" rel="noopener">Redis</a>, Jane has investigated that the official Redis image stores logs and data into a /data directory.</p>
+<p>Any data which needs to be saved on the Docker Host, and not inside containers, should be stored in <em>/opt/docker/data/redis</em>.</p>
+<p>The complete command to solve the task is <code>docker run -d --name redisMapped -v /opt/docker/data/redis:/data redis</code></p>
+<h4 id="Protip-1"><a href="#Protip-1" class="headerlink" title="Protip"></a>Protip</h4><p>Docker allows you to use $PWD as a placeholder for the current directory</p>
+<h2 id="Step-6-Running-A-Container-In-The-Foreground"><a href="#Step-6-Running-A-Container-In-The-Foreground" class="headerlink" title="Step 6 - Running A Container In The Foreground"></a>Step 6 - Running A Container In The Foreground</h2><p>Jane has been working with Redis as a background process. Jane wonders how containers work with foreground processes, such as <em>ps</em> or <em>bash</em>.</p>
+<p>Previously, Jane used the <em>-d</em> to execute the container in a detached, background, state. Without specifying this, the container would run in the foreground. If Jane wanted to interact with the container (for example, to access a bash shell) she could include the options <em>-it</em>.</p>
+<p>As well as defining whether the container runs in the background or foreground, certain images allow you to override the command used to launch the image. Being able to replace the default command makes it possible to have a single image that can be re-purposed in multiple ways. For example, the Ubuntu image can either run OS commands or run an interactive bash prompt using <em>/bin/bash</em></p>
+<h4 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h4><p>The command <code>docker run ubuntu ps</code> launches an Ubuntu container and executes the command <em>ps</em> to view all the processes running in a container.</p>
+<p>Using <code>docker run -it ubuntu bash</code> allows Jane to get access to a bash shell inside of a container.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://byzx.ink/2019/05/20/Deploying Your First Docker Container/" data-id="cjz1zl4ao00042zjxlx7lk1kt" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/06/06/Deploy Static HTML Website as Container/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Deploy Static HTML Website as Container
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/05/14/2019-05-14-Linus-Torvalds’-TED-talk/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Linus Torvalds’ TED talk</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Code-s-notes/">Code's notes</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Learning/">Learning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Study-notes/">Study notes</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络相关/">网络相关</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/06/09/Optimising Dockerfile with OnBuild/">Optimising Dockerfile with OnBuild</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/08/Dockerizing Node.js applications/">Dockerizing Node.js applications</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/07/Building Container Images/">Building Container Images</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/06/Deploy Static HTML Website as Container/">Deploy Static HTML Website as Container</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/20/Deploying Your First Docker Container/">Deploying Your First Docker Container</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 浣溪沙<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

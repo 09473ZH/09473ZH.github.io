@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Dockerizing Node.js applications | 不言朝夕</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="看我咸鱼拔刀!">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Dockerizing Node.js applications">
+<meta property="og:url" content="https://byzx.ink/2019/06/08/Dockerizing Node.js applications/index.html">
+<meta property="og:site_name" content="不言朝夕">
+<meta property="og:description" content="看我咸鱼拔刀!">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://i.loli.net/2019/06/08/5cfbaa37356c048679.png">
+<meta property="og:updated_time" content="2019-06-09T07:04:39.209Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Dockerizing Node.js applications">
+<meta name="twitter:description" content="看我咸鱼拔刀!">
+<meta name="twitter:image" content="https://i.loli.net/2019/06/08/5cfbaa37356c048679.png">
+  
+    <link rel="alternate" href="/atom.xml" title="不言朝夕" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">不言朝夕</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://byzx.ink"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="hello-Dockerizing Node.js applications" class="article article-type-hello" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/08/Dockerizing Node.js applications/" class="article-date">
+  <time datetime="2019-06-08T07:00:00.000Z" itemprop="datePublished">2019-06-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Study-notes/">Study notes</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Dockerizing Node.js applications
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>看我咸鱼拔刀!</p>
+</blockquote>
+<a id="more"></a>
+
+
+
+<p>在看这个教程之前，可以先看看<a href="https://nodejs.org/en/docs/guides/nodejs-docker-webapp/" target="_blank" rel="noopener">node的官方文档</a> <a href="https://joycc.cn/p/261.html" target="_blank" rel="noopener">(翻译版)</a>(翻译官方文档真的是业界良心)</p>
+<p>然后部署这个需要一些文件，这些文件在这个教程网站的实验环境已经准备好了。为了方便我也会搬过来。（所以其实看这个教程更好  看了这个教程下面的内容大概就可以略过了（逃</p>
+<p><a href="https://www.digitalocean.com/community/tutorials/how-to-build-a-node-js-application-with-docker" target="_blank" rel="noopener">better tutorial</a></p>
+<p>项目结构:<img src="https://i.loli.net/2019/06/08/5cfbaa37356c048679.png" alt="dd"></p>
+<p>Makefile</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">build: </span><br><span class="line">	tar --exclude=.git/ -zcvf scrapbook-node-docker-example.tar.gz .</span><br></pre></td></tr></table></figure>
+
+<p>app.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">var</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"><span class="keyword">var</span> favicon = <span class="built_in">require</span>(<span class="string">'serve-favicon'</span>);</span><br><span class="line"><span class="keyword">var</span> logger = <span class="built_in">require</span>(<span class="string">'morgan'</span>);</span><br><span class="line"><span class="keyword">var</span> cookieParser = <span class="built_in">require</span>(<span class="string">'cookie-parser'</span>);</span><br><span class="line"><span class="keyword">var</span> bodyParser = <span class="built_in">require</span>(<span class="string">'body-parser'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> routes = <span class="built_in">require</span>(<span class="string">'./routes/index'</span>);</span><br><span class="line"><span class="keyword">var</span> users = <span class="built_in">require</span>(<span class="string">'./routes/users'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> app = express();</span><br><span class="line"></span><br><span class="line"><span class="comment">// view engine setup</span></span><br><span class="line">app.set(<span class="string">'views'</span>, path.join(__dirname, <span class="string">'views'</span>));</span><br><span class="line">app.set(<span class="string">'view engine'</span>, <span class="string">'jade'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// uncomment after placing your favicon in /public</span></span><br><span class="line"><span class="comment">//app.use(favicon(__dirname + '/public/favicon.ico'));</span></span><br><span class="line">app.use(logger(<span class="string">'dev'</span>));</span><br><span class="line">app.use(bodyParser.json());</span><br><span class="line">app.use(bodyParser.urlencoded(&#123; <span class="attr">extended</span>: <span class="literal">false</span> &#125;));</span><br><span class="line">app.use(cookieParser());</span><br><span class="line">app.use(express.static(path.join(__dirname, <span class="string">'public'</span>)));</span><br><span class="line"></span><br><span class="line">app.use(<span class="string">'/'</span>, routes);</span><br><span class="line">app.use(<span class="string">'/users'</span>, users);</span><br><span class="line"></span><br><span class="line"><span class="comment">// catch 404 and forward to error handler</span></span><br><span class="line">app.use(<span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> err = <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Not Found'</span>);</span><br><span class="line">    err.status = <span class="number">404</span>;</span><br><span class="line">    next(err);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// error handlers</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// development error handler</span></span><br><span class="line"><span class="comment">// will print stacktrace</span></span><br><span class="line"><span class="keyword">if</span> (app.get(<span class="string">'env'</span>) === <span class="string">'development'</span>) &#123;</span><br><span class="line">    app.use(<span class="function"><span class="keyword">function</span>(<span class="params">err, req, res, next</span>) </span>&#123;</span><br><span class="line">        res.status(err.status || <span class="number">500</span>);</span><br><span class="line">        res.render(<span class="string">'error'</span>, &#123;</span><br><span class="line">            message: err.message,</span><br><span class="line">            error: err</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// production error handler</span></span><br><span class="line"><span class="comment">// no stacktraces leaked to user</span></span><br><span class="line">app.use(<span class="function"><span class="keyword">function</span>(<span class="params">err, req, res, next</span>) </span>&#123;</span><br><span class="line">    res.status(err.status || <span class="number">500</span>);</span><br><span class="line">    res.render(<span class="string">'error'</span>, &#123;</span><br><span class="line">        message: err.message,</span><br><span class="line">        error: &#123;&#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = app;</span><br></pre></td></tr></table></figure>
+
+<p>bin/www</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/env node</span></span><br><span class="line"><span class="keyword">var</span> debug = <span class="built_in">require</span>(<span class="string">'debug'</span>)(<span class="string">'scrapbook-node-docker-client-as-container'</span>);</span><br><span class="line"><span class="keyword">var</span> app = <span class="built_in">require</span>(<span class="string">'../app'</span>);</span><br><span class="line"></span><br><span class="line">app.set(<span class="string">'port'</span>, process.env.PORT || <span class="number">3000</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> server = app.listen(app.get(<span class="string">'port'</span>), <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  debug(<span class="string">'Express server listening on port '</span> + server.address().port);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p> package.json</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"name"</span>: <span class="string">"scrapbook-node-docker-client-as-container"</span>,</span><br><span class="line">  <span class="attr">"version"</span>: <span class="string">"0.0.0"</span>,</span><br><span class="line">  <span class="attr">"private"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"scripts"</span>: &#123;</span><br><span class="line">    <span class="attr">"start"</span>: <span class="string">"node ./bin/www"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"dependencies"</span>: &#123;</span><br><span class="line">    <span class="attr">"express"</span>: <span class="string">"~4.9.0"</span>,</span><br><span class="line">    <span class="attr">"body-parser"</span>: <span class="string">"~1.8.1"</span>,</span><br><span class="line">    <span class="attr">"cookie-parser"</span>: <span class="string">"~1.3.3"</span>,</span><br><span class="line">    <span class="attr">"morgan"</span>: <span class="string">"~1.3.0"</span>,</span><br><span class="line">    <span class="attr">"serve-favicon"</span>: <span class="string">"~2.1.3"</span>,</span><br><span class="line">    <span class="attr">"debug"</span>: <span class="string">"~2.0.0"</span>,</span><br><span class="line">    <span class="attr">"jade"</span>: <span class="string">"~1.6.0"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>style.css</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">50px</span>;</span><br><span class="line">  <span class="attribute">font</span>: <span class="number">14px</span> <span class="string">"Lucida Grande"</span>, Helvetica, Arial, sans-serif;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">a</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#00B7FF</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>routes/index.js</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">var</span> router = express.Router();</span><br><span class="line"></span><br><span class="line"><span class="comment">/* GET home page. */</span></span><br><span class="line">router.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  res.render(<span class="string">'index'</span>, &#123; <span class="attr">title</span>: <span class="string">'Express'</span> &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = router;</span><br></pre></td></tr></table></figure>
+
+<p>routes/users.js</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">var</span> router = express.Router();</span><br><span class="line"></span><br><span class="line"><span class="comment">/* GET users listing. */</span></span><br><span class="line">router.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  res.send(<span class="string">'respond with a resource'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = router;</span><br></pre></td></tr></table></figure>
+
+<p>views/error.jade</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">extends layout</span><br><span class="line"></span><br><span class="line">block content</span><br><span class="line">  h1= message</span><br><span class="line">  h2= error.status</span><br><span class="line">  pre #&#123;error.stack&#125;</span><br></pre></td></tr></table></figure>
+
+<p>views/index.jade</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">extends layout</span><br><span class="line"></span><br><span class="line">block content</span><br><span class="line">  h1= title</span><br><span class="line">  p Welcome to #&#123;title&#125;</span><br></pre></td></tr></table></figure>
+
+<p>views/layout.jade</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">doctype html</span><br><span class="line">html</span><br><span class="line">  head</span><br><span class="line">    title= title</span><br><span class="line">    link(rel=&apos;stylesheet&apos;, href=&apos;/stylesheets/style.css&apos;)</span><br><span class="line">  body</span><br><span class="line">    block content</span><br></pre></td></tr></table></figure>
+
+<h3 id="Step-1-Base-Image"><a href="#Step-1-Base-Image" class="headerlink" title="Step 1 - Base Image"></a>Step 1 - Base Image</h3><p>As we described in the previous scenario, all images started with a base image, ideally as close to your desired configuration as possible. Node.js has pre-built images available with tags for each released version.</p>
+<p>The image for Node 10.0 is node:10-alpine. This is an Alpine-based build which is smaller and more streamlined than the official image.</p>
+<p>Alongside the base image, we also need to create the base directories of where the application runs from. Using the <em>RUN <command></em> we can execute commands as if they’re running from a command shell, by using <code>mkdir</code> we can create the directories where the application will execute from. In this case, an ideal directory would be <em>/src/app</em> as the environment user has read/write access to this directory.</p>
+<p>We can define a working directory using <em>WORKDIR <directory></directory></em> to ensure that all future commands are executed from the directory relative to our application.</p>
+<h4 id="Task-Define-Base-Environment"><a href="#Task-Define-Base-Environment" class="headerlink" title="Task: Define Base Environment"></a>Task: Define Base Environment</h4><p>Set the <em>FROM <image>:<tag></tag></image></em>, <em>RUN <command>*and *WORKDIR <directory></directory></em> on separate lines to configure the base environment for deploying your application.</p>
+<h3 id="Step-2-NPM-Install"><a href="#Step-2-NPM-Install" class="headerlink" title="Step 2 - NPM Install"></a>Step 2 - NPM Install</h3><p>In the previous set, we configured the foundation of our configuration and how we want the application to be deployed. The next stage is to install the dependencies required to run the application. For Node.js this means running NPM install.</p>
+<p>To keep build times to a minimum, Docker caches the results of executing a line in the Dockerfile for use in a future build. If something has changed, then Docker will invalidate the current and all following lines to ensure everything is up-to-date.</p>
+<p>With NPM we only want to re-run <code>npm install</code> if something within our <em>package.json</em> file has changed. If nothing has changed then we can use the cache version to speed up deployment. By using <em>COPY package.json <dest></dest></em> we can cause the <em>RUN npm install</em> command to be invalidated if the <em>package.json</em> file has changed. If the file has not changed, then the cache will not be invalidated, and the cached results of the npm install command will be used.</p>
+<h4 id="Task-Add-Dockerfile-Lines"><a href="#Task-Add-Dockerfile-Lines" class="headerlink" title="Task: Add Dockerfile Lines"></a>Task: Add Dockerfile Lines</h4><p>The following two lines are required in order Dockerfile to run npm install.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Copy to EditorCOPY package.json /src/app/package.json</span><br><span class="line"></span><br><span class="line">RUN npm install</span><br></pre></td></tr></table></figure>
+
+<p>Copy the lines to the Dockerfile now so they can be used in the build later.</p>
+<h4 id="Protip"><a href="#Protip" class="headerlink" title="Protip"></a>Protip</h4><p>If you don’t want to use the cache as part of the build then set the option <em>–no-cache=true</em> as part of the <code>docker build</code> command.</p>
+<h3 id="Step-3-Configuring-Application"><a href="#Step-3-Configuring-Application" class="headerlink" title="Step 3 - Configuring Application"></a>Step 3 - Configuring Application</h3><p>After we’ve installed our dependencies, we want to copy over the rest of our application’s source code. Splitting the installation of the dependencies and copying out source code enables us to use the cache when required.</p>
+<p>If we copied our code before running <em>npm install</em>then it would run every time as our code would have changed. By copying just package.json we can be sure that the cache is invalidated only when our package contents have changed.</p>
+<h4 id="Task-Deploy-Application"><a href="#Task-Deploy-Application" class="headerlink" title="Task: Deploy Application"></a>Task: Deploy Application</h4><p>Create the desired steps in the Dockerfile to finish the deployment of the application.</p>
+<p>We can copy the entire directory where our Dockerfile is using <em>COPY . <dest dir></dest></em>.</p>
+<p>Once the source code has been copied, the ports the application requires to be accessed is defined using <em>EXPOSE <port></port></em>.</p>
+<p>Finally, the application needs to be started. One neat trick when using Node.js is to use the <em>npm start*command. This looks in the *package.json</em> file to know how to launch the application saving duplication of commands.</p>
+<p>In the next step, we’ll build and launch the image.</p>
+<p>整好之后dockerfile大概就是这个亚子：</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> node:<span class="number">10</span>-alpine</span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> mkdir -p /src/app</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="bash"> /src/app</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">COPY</span><span class="bash"> package.json /src/app/package.json</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> npm install</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">COPY</span><span class="bash"> . /src/app</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">3000</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">CMD</span><span class="bash"> [ <span class="string">"npm"</span>, <span class="string">"start"</span> ]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Step-4-Building-amp-Launching-Container"><a href="#Step-4-Building-amp-Launching-Container" class="headerlink" title="Step 4 - Building &amp; Launching Container"></a>Step 4 - Building &amp; Launching Container</h3><p>To launch your application inside the container you first need to build an image.</p>
+<h4 id="Example-Build-amp-Launch"><a href="#Example-Build-amp-Launch" class="headerlink" title="Example: Build &amp; Launch"></a>Example: Build &amp; Launch</h4><p>The command to build the image is <code>docker build -t my-nodejs-app .</code></p>
+<p>The command to launch the built image is <code>docker run -d --name my-running-app -p 3000:3000 my-nodejs-app</code></p>
+<h4 id="Testing-Container"><a href="#Testing-Container" class="headerlink" title="Testing Container"></a>Testing Container</h4><p>You can test the container is accessible using curl. If the application responds then you know that everything has correctly started.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl http://docker:3000</span><br></pre></td></tr></table></figure>
+
+<h3 id="Step-5-Environment-Variables"><a href="#Step-5-Environment-Variables" class="headerlink" title="Step 5 - Environment Variables"></a>Step 5 - Environment Variables</h3><p>Docker images should be designed that they can be transferred from one environment to the other without making any changes or requiring to be rebuilt. By following this pattern you can be confident that if it works in one environment, such as staging, then it will work in another, such as production.</p>
+<p>With Docker, environment variables can be defined when you launch the container. For example with Node.js applications, you should define an environment variable for <em>NODE_ENV</em> when running in production.</p>
+<p>Using <em>-e</em> option, you can set the name and value as <em>-e NODE_ENV=production</em></p>
+<h4 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name my-production-running-app -e NODE_ENV=production -p 3000:3000 my-nodejs-app</span><br></pre></td></tr></table></figure>
+
+<p>=====================================================================================<br>注意：<strong>EXPOSE</strong> 声明端口<br>格式为 EXPOSE &lt;端口1&gt; [&lt;端口2&gt;…]。</p>
+<p>EXPOSE 指令是声明运行时容器提供服务端口，这只是一个声明，在运行时并不会因为这个声明应用就会开启这个端口的服务。在 Dockerfile 中写入这样的声明有两个好处，一个是帮助镜像使用者理解这个镜像服务的守护端口，以方便配置映射；另一个用处则是在运行时使用随机端口映射时，也就是 docker run -P 时，会自动随机映射 EXPOSE 的端口。</p>
+<p>要将 EXPOSE 和在运行时使用 -p &lt;宿主端口&gt;:&lt;容器端口&gt; 区分开来。-p，是映射宿主端口和容器端口，换句话说，就是将容器的对应端口服务公开给外界访问，而 EXPOSE 仅仅是声明容器打算使用什么端口而已，并不会自动在宿主进行端口映射。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://byzx.ink/2019/06/08/Dockerizing Node.js applications/" data-id="cjz1zl4ap00052zjxg6kt4j7t" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/06/09/Optimising Dockerfile with OnBuild/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Optimising Dockerfile with OnBuild
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/06/07/Building Container Images/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Building Container Images</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Code-s-notes/">Code's notes</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Learning/">Learning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Study-notes/">Study notes</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络相关/">网络相关</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/06/09/Optimising Dockerfile with OnBuild/">Optimising Dockerfile with OnBuild</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/08/Dockerizing Node.js applications/">Dockerizing Node.js applications</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/07/Building Container Images/">Building Container Images</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/06/Deploy Static HTML Website as Container/">Deploy Static HTML Website as Container</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/20/Deploying Your First Docker Container/">Deploying Your First Docker Container</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 浣溪沙<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

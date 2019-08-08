@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>网络相关基本概念 | 不言朝夕</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="基本概念">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络相关基本概念">
+<meta property="og:url" content="https://byzx.ink/2019/03/12/网络相关基本概念/index.html">
+<meta property="og:site_name" content="不言朝夕">
+<meta property="og:description" content="基本概念">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-04-05T12:13:46.353Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="网络相关基本概念">
+<meta name="twitter:description" content="基本概念">
+  
+    <link rel="alternate" href="/atom.xml" title="不言朝夕" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">不言朝夕</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://byzx.ink"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="[hello]-网络相关基本概念" class="article article-type-[hello]" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/03/12/网络相关基本概念/" class="article-date">
+  <time datetime="2019-03-12T15:36:26.000Z" itemprop="datePublished">2019-03-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/网络相关/">网络相关</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      网络相关基本概念
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>基本概念</p>
+</blockquote>
+<a id="more"></a>
+
+<p><a href="https://zh.wikipedia.org/zh-hans/文件描述符" target="_blank" rel="noopener">文件描述符</a>:内核（kernel）利用文件描述符（file descriptor）来访问文件。文件描述符是非负整数。打开现存文件或新建文件时，内核会返回一个文件描述符。读写文件也需要使用文件描述符来指定待读写的文件。</p>
+<p><a href="https://zh.wikipedia.org/wiki/%E9%80%9A%E8%A8%8A%E5%9F%A0" target="_blank" rel="noopener">端口</a>:是一种经由软件创建的服务，在一个计算机操作系统中扮演通信的端点（endpoint）。每个通信端口都会与主机的IP地址及通信协议关联。从实现的角度讲，端口是一种抽象的软件机制，包括一些数据结构和I/O缓冲区。应用程序(即进程)通过系统调用与某端口建立绑定（BINDING）关系后，传输层传给该端口的数据都被相应进程接收，相应进程发给传输层的数据都通过改端口输出。在TCP/IP的实现中，端口操作类似于一般的I/O操作，进程获取一个端口，相当于获取本地唯一的I/O文件，可以用一般的读写原语访问它。</p>
+<p>端口号:类似于文件描述符，每个端口都拥有一个叫做端口号（post number)的整数型标识符，用于区别不同的端口。</p>
+<p>区别全双工、半双工、单工：</p>
+<p>单工：a和b说话，b只能听a说（甲可以向乙发送数据，但是乙不能向甲发送数据。比如班主任开班会)<br>半双工：参考对讲机，A：能不能听到我说话，over<br>                B：可以可以，over（虽然数据可以在两个方向上传递，但通信双方不能同时收发数据。比如辩论比赛的时候。）<br>全双工：参考打电话：A：哎，老王啊！@#！#￥#@！#<br>                B：@#￥@￥@￥#@ （可以双向传递，可以同时收发数据。比如两个人聊天)</p>
+<p>端口号的分配机制：端口号是由每台主机自己分配的，只有本地意义，无法保证全网唯一，那么怎么解决两主机两进程之间的通信问题呢？由于在Internet的应用程序开发中，大多都采用客户端/服务器（C/S)的模式，在这种模式下，客户机与服务器的通信总由C发起，因此只需要让C进程事先知道S进程的端口号就行了。所以，TCP/IP采用了全局分配（静态分配）和本地分配(动态分配)相结合的方法。对于TCP或UDP，将它们的全部65535个端口号分为保留端口号（静态分配）和自由端口号（动态分配)。但是，服务器进程是要为多个客户端进程服务的，如果当某个客户端第一次成功地连接到服务器后，服务器就接着用这个保留端口继续与客户端进程通信，那么其他申请连接的客户端就只能等待了，这就无法实现服务器进程同时为多个客户端服务的要求。这是怎么回事呢~？原来，在TCP/IP的端口号分配机制中，服务器的保留端口是专门用来监听客户端的连接请求的，当服务器从保留端口收到一个客户端的连接请求后，立即创建另外一个线程，并为这个线程分配一个服务器的自由端口号，然后用这个线程继续与那个客户端进行通信，而服务器的保留端口就又可以接收另外一个客户端的连接请求了。这就是所谓“偷梁换柱”的方法。</p>
+<p>并发：多任务的操作系统能把多个应用程序装入内存，为他们创建进程，分配资源，让多个进程宏观上同时处于运行过程中，这个状态称作并发。大多数并发服务器是动态操作的，在设计并发服务器时，可以让主服务器线程为每个到来的客户端请求创建一个新的子服务线程。一般服务器程序代码由两部分组成，第一部分代码负责监听并接收客户机请求，还负责为客户机请求创建新的服务线程；另一部分代码负责处理单个客户端请求，如与客户端交换数据，提供具体的服务。服务器存在多个副本，每个服务被赋予一个唯一的标识，每个来自客户的请求包含了服务标识（也就是说，传输协议给了客户端也给了服务端唯一的标识），这样就可以正确匹配了。</p>
+<p>什么是套接字编程接口：<br>套接字应用程序编程接口时网络应用程序通过网络协议栈进行通信所使用的接口，即应用程序与协议栈软件之间的接口。它定义了应用程序与协议栈软件进行交互时可以使用的一组操作，也就决定了应用程序使用协议栈的方式，所能实现的功能以及开发具有这些功能的程序的难度。具体地说，套接字编程接口给出了应用程序能够调用的一组过程以及这些过程所需要的参数。</p>
+<p>两种实现方式：<br>操作系统内核/库程序</p>
+<p>I/O模式：<br>UNIX操作系统对文件和所有其他的I/O设备采用一种统一的操作模式，就是“open-read-write-close”的I/O模式。在一个用户进程要进行I/O操作时，他首先调用open命令，获得对指定文件或设备的使用权，并返回一个描述符（作为句柄）。然后这个用户进程可以多次调用“读”或“写”命令来传输数据。描述符是命令的参数，来指明所操作的对象。在套接字编程中，往往需要多个参数。为了避免参数过多，套接字编程接口的设计者定义了多个函数。这样大多数函数就只有三个或者更少的参数。</p>
+<p>附：资料汇总: 1. <a href="https://linux.die.net/man/2/socket" target="_blank" rel="noopener">socket(2) - Linux man page</a>   2.<a href="https://linux.die.net/man/2/recv" target="_blank" rel="noopener">recv(2) - Linux man page</a>    3. <a href="https://linux.die.net/man/2/setsockopt" target="_blank" rel="noopener">setsockopt(2) - Linux man page</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://byzx.ink/2019/03/12/网络相关基本概念/" data-id="cjz1zl4ax000f2zjxc3okgbuj" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/05/14/2019-05-14-Linus-Torvalds’-TED-talk/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Linus Torvalds’ TED talk
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/02/24/代理基础/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">代理基础</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Code-s-notes/">Code's notes</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Learning/">Learning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Study-notes/">Study notes</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络相关/">网络相关</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/06/09/Optimising Dockerfile with OnBuild/">Optimising Dockerfile with OnBuild</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/08/Dockerizing Node.js applications/">Dockerizing Node.js applications</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/07/Building Container Images/">Building Container Images</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/06/Deploy Static HTML Website as Container/">Deploy Static HTML Website as Container</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/20/Deploying Your First Docker Container/">Deploying Your First Docker Container</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 浣溪沙<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

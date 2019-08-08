@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>代理基础 | 不言朝夕</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="A little simple http proxy">
+<meta property="og:type" content="article">
+<meta property="og:title" content="代理基础">
+<meta property="og:url" content="https://byzx.ink/2019/02/24/代理基础/index.html">
+<meta property="og:site_name" content="不言朝夕">
+<meta property="og:description" content="A little simple http proxy">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-04-05T09:37:33.359Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="代理基础">
+<meta name="twitter:description" content="A little simple http proxy">
+  
+    <link rel="alternate" href="/atom.xml" title="不言朝夕" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">不言朝夕</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://byzx.ink"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="hello-代理基础" class="article article-type-hello" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/02/24/代理基础/" class="article-date">
+  <time datetime="2019-02-24T08:00:00.000Z" itemprop="datePublished">2019-02-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/网络相关/">网络相关</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      代理基础
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>A little simple http proxy</p>
+</blockquote>
+<a id="more"></a>
+
+
+
+
+
+<h4 id="HTTP代理服务器"><a href="#HTTP代理服务器" class="headerlink" title="HTTP代理服务器"></a>HTTP代理服务器</h4><p>1.代理扮演的是「中间人」角色，对于连接到它的客户端来说，它是服务端；对于要连接的服务端来说，它是客户端。它就负责在两端之间来回传送 HTTP 报文。</p>
+<p>2.将浏览器请求的第一行中完整的URL替换成路径(‘/‘)：GET后面不是请求的文件的路径，而是整个URI。那么代理服务器得把浏览器的请求改成路径再转发。</p>
+<p>HTTP_proxy_beta1.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding:utf-8</span></span><br><span class="line"><span class="keyword">from</span> socket <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">SerPort = <span class="number">8888</span></span><br><span class="line">SerSock = socket(AF_INET, SOCK_STREAM)<span class="comment"># 创建监听套接字</span></span><br><span class="line">SerSock.bind((<span class="string">''</span>, SerPort))</span><br><span class="line">SerSock.listen(<span class="number">5</span>)</span><br><span class="line"><span class="keyword">print</span> (<span class="string">'Serving at %s'</span>% SerPort) </span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>: </span><br><span class="line">    CliSock, addr = SerSock.accept()<span class="comment">#建立连接，监听接入的连接</span></span><br><span class="line">    print(<span class="string">'Received a connection from: '</span>, addr)</span><br><span class="line">    message = CliSock.recv(<span class="number">4096</span>).decode()<span class="comment">#从socket读取信息</span></span><br><span class="line">    filename = message.split()[<span class="number">1</span>].partition(<span class="string">"//"</span>)[<span class="number">2</span>].replace(<span class="string">'/'</span>, <span class="string">'_'</span>)</span><br><span class="line">    fileExist = <span class="string">"false"</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        f = open(filename, <span class="string">"r"</span>) <span class="comment"># 检查缓存中是否存在该文件</span></span><br><span class="line">        outputdata = f.readlines()</span><br><span class="line">        </span><br><span class="line">        fileExist = <span class="string">"true"</span><span class="comment">#存在：</span></span><br><span class="line">        print(<span class="string">'File Exists!'</span>)</span><br><span class="line">        CliSock.send(<span class="string">"HTTP/1.0 200 OK\r\n"</span>.encode())</span><br><span class="line">        CliSock.send(<span class="string">"Content-Type:text/html\r\n"</span>.encode())</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, len(outputdata)):</span><br><span class="line">            CliSock.send(outputdata[i].encode())<span class="comment">#用http响应报文返回对象</span></span><br><span class="line">        print(<span class="string">'Read from cache:'</span>)</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">except</span> IOError:<span class="comment">#不存在：</span></span><br><span class="line">        print(<span class="string">'File Exist: '</span>, fileExist)</span><br><span class="line">        <span class="keyword">if</span> fileExist == <span class="string">"false"</span>:</span><br><span class="line">            print(<span class="string">'Creating proxyserver socket：'</span>)</span><br><span class="line">            c = socket(AF_INET, SOCK_STREAM)<span class="comment">#打开一个该对象的初始服务器连接</span></span><br><span class="line">            hostn = message.split()[<span class="number">1</span>].partition(<span class="string">"//"</span>)[<span class="number">2</span>].partition(<span class="string">"/"</span>)[<span class="number">0</span>]</span><br><span class="line">            print(<span class="string">'Host Name: '</span>, hostn)</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                c.connect((hostn, <span class="number">80</span>))</span><br><span class="line">                print(<span class="string">'Socket connected to port 80 of the host'</span>)</span><br><span class="line">                c.sendall(message.encode())               </span><br><span class="line">                buff = c.recv(<span class="number">4096</span>) </span><br><span class="line">                CliSock.sendall(buff)<span class="comment">#接收到该请求后初始服务器向该proxy发送对应的http报文</span></span><br><span class="line">               </span><br><span class="line">                tmpFile = open(<span class="string">"./"</span> + filename, <span class="string">"w"</span>)</span><br><span class="line">                tmpFile.writelines(buff.decode().replace(<span class="string">'\r\n'</span>, <span class="string">'\n'</span>))<span class="comment">#proxy储存副本转发给客户端</span></span><br><span class="line">                tmpFile.close()</span><br><span class="line"></span><br><span class="line">            <span class="keyword">except</span>:</span><br><span class="line">                print(<span class="string">"Illegal request"</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">else</span>:            </span><br><span class="line">            print(<span class="string">'File Not Found'</span>)</span><br><span class="line">    </span><br><span class="line">    CliSock.close()</span><br><span class="line">SerSock.close()</span><br></pre></td></tr></table></figure>
+
+<p>#### </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://byzx.ink/2019/02/24/代理基础/" data-id="cjz1zl4av000c2zjx2td4dqtq" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/03/12/网络相关基本概念/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          网络相关基本概念
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/02/23/UDPandTCP套接字编程以及简单应用/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">UDP/TCP套接字编程以及简单应用</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Code-s-notes/">Code's notes</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Learning/">Learning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Study-notes/">Study notes</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络相关/">网络相关</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/06/09/Optimising Dockerfile with OnBuild/">Optimising Dockerfile with OnBuild</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/08/Dockerizing Node.js applications/">Dockerizing Node.js applications</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/07/Building Container Images/">Building Container Images</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/06/Deploy Static HTML Website as Container/">Deploy Static HTML Website as Container</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/20/Deploying Your First Docker Container/">Deploying Your First Docker Container</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 浣溪沙<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

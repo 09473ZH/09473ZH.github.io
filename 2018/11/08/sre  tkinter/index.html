@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>用Tkinter写一个计算器 | 不言朝夕</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Tkinter">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用Tkinter写一个计算器">
+<meta property="og:url" content="https://byzx.ink/2018/11/08/sre  tkinter/index.html">
+<meta property="og:site_name" content="不言朝夕">
+<meta property="og:description" content="Tkinter">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-03-27T09:45:10.273Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用Tkinter写一个计算器">
+<meta name="twitter:description" content="Tkinter">
+  
+    <link rel="alternate" href="/atom.xml" title="不言朝夕" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">不言朝夕</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://byzx.ink"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="hello-sre  tkinter" class="article article-type-hello" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/08/sre  tkinter/" class="article-date">
+  <time datetime="2018-11-08T08:00:00.000Z" itemprop="datePublished">2018-11-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Code-s-notes/">Code's notes</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      用Tkinter写一个计算器
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>Tkinter</p>
+<a id="more"></a>
+</blockquote>
+<p>以下是我学习tkinter的一些笔记：<br>   对tkinter的认识，可以从一个简单的代码开始:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> tkinter <span class="keyword">import</span> *           <span class="comment"># 导入 tkinter 库</span></span><br><span class="line">root = Tk()                     <span class="comment"># 创建窗口对象的背景色</span></span><br><span class="line">                                <span class="comment"># 创建两个列表</span></span><br><span class="line">li     = [<span class="string">'C'</span>,<span class="string">'python'</span>,<span class="string">'php'</span>,<span class="string">'html'</span>,<span class="string">'SQL'</span>,<span class="string">'java'</span>]</span><br><span class="line">movie  = [<span class="string">'CSS'</span>,<span class="string">'jQuery'</span>,<span class="string">'Bootstrap'</span>]</span><br><span class="line">listb  = Listbox(root)          <span class="comment">#  创建两个列表组件</span></span><br><span class="line">listb2 = Listbox(root)</span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> li:                 <span class="comment"># 第一个小部件插入数据</span></span><br><span class="line">    listb.insert(<span class="number">0</span>,item)</span><br><span class="line"> </span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> movie:              <span class="comment"># 第二个小部件插入数据</span></span><br><span class="line">    listb2.insert(<span class="number">0</span>,item)</span><br><span class="line"> </span><br><span class="line">listb.pack()                    <span class="comment"># 将小部件放置到主窗口中</span></span><br><span class="line">listb2.pack()</span><br><span class="line">root.mainloop()                 <span class="comment"># 进入消息循环</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="常用参数"><a href="#常用参数" class="headerlink" title="常用参数"></a>常用参数</h4><p>使用tkinter.Tk() 生成主窗口（root=tkinter.Tk()）<br>root.title(‘标题名’)    　　 　　修改框体的名字,也可在创建时使用className参数来命名；<br>root.resizable(0,0)   　　 　　框体大小可调性，分别表示x,y方向的可变性；<br>root.geometry(‘250x150’)　　指定主框体大小；<br>root.quit()        　　　　 　　 退出；<br>root.update_idletasks()<br>root.update()        　　　　　刷新页面；</p>
+<pre><code>例：root = tkinter.Tk(className=&quot;Calculator&quot;)</code></pre><h4 id="核心组件"><a href="#核心组件" class="headerlink" title="核心组件"></a>核心组件</h4><pre><code>Button        　　按钮；
+Canvas        　　绘图形组件，可以在其中绘制图形；
+Checkbutton      复选框；
+Entry        　　 文本框（单行）；
+Text             文本框（多行）；
+Frame         　　框架，将几个组件组成一组
+Label        　　 标签，可以显示文字或图片；
+Listbox     　　  列表框；
+Menu     　　     菜单；
+Menubutton       它的功能完全可以使用Menu替代；
+Message          与Label组件类似，但是可以根据自身大小将文本换行；
+Radiobutton      单选框；
+Scale      　　   滑块；允许通过滑块来设置一数字值
+Scrollbar        滚动条；配合使用canvas, entry, listbox, and text窗口部件的标准滚动条；
+Toplevel         用来创建子窗口窗口组件。</code></pre><p>（在tkinter中窗口部件类没有分级；所有的窗口部件类在树中都是兄弟。）</p>
+<p>例：<br>displaywidget = tkinter.Entry(iframe(root), font=(‘arial 55 bold’), fg=”blue”, <br>                              justify=”right”, relief=”sunken”, bd=15, textvariable=displayvar)</p>
+<h4 id="组件的放置和排版（pack-grid-place"><a href="#组件的放置和排版（pack-grid-place" class="headerlink" title="组件的放置和排版（pack,grid,place)"></a>组件的放置和排版（pack,grid,place)</h4><pre><code>pack组件设置位置属性参数：
+after:    　　　 将组件置于其他组件之后；
+before:    　　　将组件置于其他组件之前；
+anchor:    　　  组件的对齐方式，顶对齐&apos;n&apos;,底对齐&apos;s&apos;,左&apos;w&apos;,右&apos;e&apos;
+side:    　　　　组件在主窗口的位置，可以为&apos;top&apos;,&apos;bottom&apos;,&apos;left&apos;,&apos;right&apos;（使用时tkinter.TOP,tkinter.E）；
+fill            填充方式 (Y,垂直，X，水平；还有both）
+expand                1可扩展，0不可扩展</code></pre><p>grid组件使用行列的方法放置组件的位置，参数有：<br>    column:         组件所在的列起始位置；<br>    columnspam:     组件的列宽；<br>    row：      　　　组件所在的行起始位置；<br>    rowspam：    　　组件的行宽；</p>
+<pre><code> place组件可以直接使用坐标来放置组件，参数有：
+anchor:    　　　组件对齐方式；
+x:        　　　 组件左上角的x坐标；
+y:        　　   组件右上角的y坐标；
+relx:         　组件相对于窗口的x坐标，应为0-1之间的小数；
+rely:           组件相对于窗口的y坐标，应为0-1之间的小数；
+width:          组件的宽度；
+heitht:    　   组件的高度；
+relwidth:       组件相对于窗口的宽度，0-1；
+relheight:　    组件相对于窗口的高度，0-1；</code></pre><p>例： store.pack(side=’left’, fill=’both’, expand=”yes”)</p>
+<p>控制参数</p>
+<pre><code>background(bg)   　　 文本框背景色；
+foreground(fg)        前景色；
+selectbackground　　  选定文本背景色；
+selectforeground　　  选定文本前景色；
+borderwidth(bd)    　 文本框边框宽度；
+font                　字体；
+show          　　    文本框显示的字符，若为*，表示文本框为密码框；
+state            　　 状态；
+width        　　　　  文本框宽度
+ text         　　  指定组件的文本；
+value      　　    指定组件被选中中关联变量的值；
+variable     　    指定组件所关联的变量；
+indicatoron        特殊控制参数，当为0时，组件会被绘制成按钮形式;
+textvariable    　　  可变文本，与StringVar等配合着用</code></pre><p>例：<br>store = tkinter.Button(parent, text=text, bg=”powder blue”, relief=”raised”, font=(‘arial 15 bold’), <br>                           width=10, height=2)</p>
+<h4 id="Something-Else"><a href="#Something-Else" class="headerlink" title="Something Else"></a>Something Else</h4><ul>
+<li>relief:小部件的浮雕效果  <pre><code>store = tkinter.Button(parent, text=text, bg=&quot;powder blue&quot;, **relief=&quot;raised&quot;,** font=(&apos;arial 15 bold&apos;), \
+                   width=10, height=2)</code></pre></li>
+</ul>
+<p>​    </p>
+<ul>
+<li>Creating buttons:</li>
+</ul>
+<p>我看到的绘制按键的程序emmmmmm挺复杂的：<br> from tkinter import *<br> import tkinter<br>top = tkinter.Tk()</p>
+<p>B1 = tkinter.Button(top, text =”FLAT”, relief=FLAT )<br>B2 = tkinter.Button(top, text =”RAISED”, relief=RAISED )<br>B3 = tkinter.Button(top, text =”SUNKEN”, relief=SUNKEN )<br>B4 = tkinter.Button(top, text =”GROOVE”, relief=GROOVE )<br>B5 = tkinter.Button(top, text =”RIDGE”, relief=RIDGE )</p>
+<p>B1.pack()<br>B2.pack()<br>B3.pack()<br>B4.pack()<br>B5.pack()<br>top.mainloop()</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">但是在这个计算器的代码中，他应该用的是一个列表来输入文本：</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> button_data = [</span><br><span class="line"> ([&apos;C&apos;]),([&apos;CE&apos;]),</span><br><span class="line"> (&apos;7&apos;, &apos;8&apos;, &apos;9&apos;, &apos;(&apos;, &apos;)&apos;),</span><br><span class="line"> (&apos;4&apos;, &apos;5&apos;, &apos;6&apos;, &apos;*&apos;, &apos;**&apos;),</span><br><span class="line"> (&apos;1&apos;, &apos;2&apos;, &apos;3&apos;, &apos;/&apos;, &apos;%&apos;),</span><br><span class="line"> (&apos;.&apos;, &apos;0&apos;, &apos;=&apos;, &apos;+&apos;, &apos;-&apos;)]</span><br></pre></td></tr></table></figure>
+
+<p>再这样把数据插入小部件（我猜）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">keypad = iframe(root)</span><br><span class="line">for i in button_data:</span><br><span class="line"> print</span><br><span class="line">     i</span><br><span class="line">    storeframe = iframe(keypad)</span><br><span class="line">    storeframe.pack(fill=&apos;both&apos;, expand=&quot;yes&quot;, side=&quot;top&quot;)</span><br><span class="line">    for j in i:</span><br><span class="line">        ibutton(storeframe, j)</span><br></pre></td></tr></table></figure>
+
+<p>最后再合起来(大概):</p>
+<p>keypad_1 = iframe(root)</p>
+<p>感觉还是挺神奇的。。。</p>
+<p><a href="http://effbot.org/tkinterbook/button.htm" target="_blank" rel="noopener">http://effbot.org/tkinterbook/button.htm</a></p>
+<p>(这个网页介绍了button的用法)</p>
+<p><a href="https://www.python-course.eu/python_tkinter.php" target="_blank" rel="noopener">https://www.python-course.eu/python_tkinter.php</a>  </p>
+<p>(这个网站有很详细的tkinter介绍)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://byzx.ink/2018/11/08/sre  tkinter/" data-id="cjz1zl4at000b2zjx8irw1mom" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/02/23/UDPandTCP套接字编程以及简单应用/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          UDP/TCP套接字编程以及简单应用
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Code-s-notes/">Code's notes</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Learning/">Learning</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Study-notes/">Study notes</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络相关/">网络相关</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/06/09/Optimising Dockerfile with OnBuild/">Optimising Dockerfile with OnBuild</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/08/Dockerizing Node.js applications/">Dockerizing Node.js applications</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/07/Building Container Images/">Building Container Images</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/06/Deploy Static HTML Website as Container/">Deploy Static HTML Website as Container</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/20/Deploying Your First Docker Container/">Deploying Your First Docker Container</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 浣溪沙<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
