@@ -1,0 +1,58 @@
+services:
+  # ── Nginx reverse proxy ────────────────────────────────
+  nginx:
+    image: nginx:1.27-alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./docker/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - blog
+      - minio
+    restart: unless-stopped
+
+  # ── Next.js blog app ───────────────────────────────────
+  blog:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file: .env
+    environment:
+      DB_PATH: /app/data/blog.db
+      MINIO_ENDPOINT: minio
+      MINIO_PORT: "9000"
+      MINIO_USE_SSL: "false"
+    volumes:
+      - blog_data:/app/data
+    depends_on:
+      - minio
+    restart: unless-stopped
+    # Expose only to internal Docker network
+    expose:
+      - "3000"
+
+  # ── MinIO object storage ───────────────────────────────
+  minio:
+    image: minio/minio:latest
+    command: server /data --console-address ":9001"
+    env_file: .env
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ACCESS_KEY:-minioadmin}
+      MINIO_ROOT_PASSWORD: ${MINIO_SECRET_KEY:-minioadmin}
+    volumes:
+      - minio_data:/data
+    expose:
+      - "9000"
+    ports:
+      # MinIO Console (admin UI) — bind to localhost only in production
+      - "127.0.0.1:9001:9001"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  blog_data:
+  minio_data:

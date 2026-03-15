@@ -1,0 +1,11 @@
+node_modules/
+.next/
+out/
+.env
+data/
+drizzle/
+*.db
+*.db-shm
+*.db-wal
+.DS_Store
+public/rss.xml
