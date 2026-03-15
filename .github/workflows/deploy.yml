@@ -35,8 +35,7 @@ jobs:
       - name: Build
         run: pnpm build
         env:
-          NEXT_PUBLIC_BASE_PATH: /blog
-          SITE_URL: https://09473ZH.github.io/blog
+          SITE_URL: https://09473ZH.github.io
           SITE_NAME: My Blog
           SITE_DESCRIPTION: A minimalist personal blog
 
