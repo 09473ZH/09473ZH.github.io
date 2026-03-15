@@ -1,7 +1,6 @@
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
-import readingTime from 'reading-time'
 import GithubSlugger from 'github-slugger'
 import type { Post, PostMeta, PostFrontmatter, TOCItem } from '@/types'
 
@@ -51,7 +50,6 @@ export function getPostMeta(type: 'article' | 'weekly', slug: string): PostMeta 
     slug,
     type,
     frontmatter,
-    readingTime: readingTime(content).text,
   }
 }
 
@@ -113,6 +111,5 @@ export function getPost(type: 'article' | 'weekly', slug: string): Post | null {
     type,
     frontmatter,
     rawContent: content,
-    readingTime: readingTime(content).text,
   }
 }

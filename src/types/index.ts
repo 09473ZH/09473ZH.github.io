@@ -15,14 +15,12 @@ export interface Post {
   type: 'article' | 'weekly'
   frontmatter: PostFrontmatter
   rawContent: string
-  readingTime: string
 }
 
 export interface PostMeta {
   slug: string
   type: 'article' | 'weekly'
   frontmatter: PostFrontmatter
-  readingTime: string
 }
 
 export interface BookFrontmatter {
