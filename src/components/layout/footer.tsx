@@ -1,3 +1,5 @@
+import { siteConfig } from '@/lib/config'
+
 export function Footer() {
   return (
     <footer style={{ color: 'var(--color-fg-muted)' }}>
@@ -5,7 +7,7 @@ export function Footer() {
         className="mx-auto flex max-w-2xl items-center justify-center gap-4 px-5 py-6 font-mono text-xs"
         style={{ color: 'var(--color-fg-muted)' }}
       >
-        <span>© {new Date().getFullYear()} Zhou Hang</span>
+        <span>© {new Date().getFullYear()} {siteConfig.author}</span>
         <a
           href="/rss.xml"
           title="RSS"

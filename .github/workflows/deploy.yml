@@ -35,9 +35,9 @@ jobs:
       - name: Build
         run: pnpm build
         env:
-          SITE_URL: https://09473ZH.github.io
-          SITE_NAME: My Blog
-          SITE_DESCRIPTION: A minimalist personal blog
+          SITE_URL: ${{ vars.SITE_URL || 'https://username.github.io' }}
+          SITE_NAME: ${{ vars.SITE_NAME || 'My Blog' }}
+          SITE_DESCRIPTION: ${{ vars.SITE_DESCRIPTION || 'A minimalist personal blog' }}
 
       - uses: actions/upload-pages-artifact@v3
         with:

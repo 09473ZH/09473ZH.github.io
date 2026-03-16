@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { NavLinks } from './nav-links'
 import { ThemeToggle } from './theme-toggle'
+import { siteConfig } from '@/lib/config'
 
 export function Header() {
   return (
@@ -16,7 +17,7 @@ export function Header() {
           href="/"
           className="font-mono text-xs font-semibold uppercase tracking-[0.2em] transition-opacity hover:opacity-60"
         >
-          Zhou Hang
+          {siteConfig.author}
         </Link>
         <nav className="mt-3 flex items-center justify-center gap-6">
           <NavLinks />
