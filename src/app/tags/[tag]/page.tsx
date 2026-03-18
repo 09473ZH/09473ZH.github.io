@@ -9,9 +9,11 @@ interface Props {
 
 export async function generateStaticParams() {
   return Object.keys(getAllTags()).map((tag) => ({
-    tag: encodeURIComponent(tag),
+    tag,
   }))
 }
+
+export const dynamicParams = false
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { tag } = await params
